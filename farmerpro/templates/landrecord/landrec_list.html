@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+<title>Land Table</title>
+{% endblock %}
+
+{% block content %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">FARMER NAME</th>
+            <th scope="col">SURVEY NUMBER</th>
+            <th scope="col">VILLAGE</th>
+            <th scope="col">FARM AREA</th>
+            <th scope="col">UPDATE</th>
+            <th scope="col">DELETE</th>
+            <th scope="col">GET PDF</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in object_list %}
+        <tr>
+            <td>{{i.farmer_name}}</td>
+            <td>{{i.survey_number}}</td>
+            <td>{{i.village}}</td>
+            <td>{{i.farm_area}}</td>
+            <td><button class="btn btn-warning"><a href="{% url 'update_url' i.id %}">UPDATE</a></button></td>
+            <td><button class="btn btn-danger"><a href="{% url 'delete_url' i.id %}">DELETE</a></button></td>
+            <td><button class="btn btn-success"><a href="{% url 'indpdf_url' i.id %}">Download PDF</a></button></td>
+
+            
+
+            
+        </tr>
+        {% endfor %}
+        
+    </tbody>
+</table>
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}
+    
+
+
+    
+    
+
+

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+<title>Confirmation</title>
+{% endblock %}
+
+{% block content %}
+<div class="container jumbotron">
+    <form method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to delete<span style="color:darkorange">{{object.farmer_name}}, {{object.surway_number}}?</span></p>
+
+
+        <input type="submit" value="DELETE RECORD" class="btn btn-success ">
+        
+
+
+    </form>
+    <br>
+    
+    <button class="btn btn-warning"><a href="{% url 'list_url' %}">NO</a></button>
+
+
+</div>
+
+{% endblock %}
+
